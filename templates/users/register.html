@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="uk-flex uk-flex-center uk-margin">
+    <img src="{% static 'img/instagram.png' %}" alt="">
+</div>
+<h3 class="uk-heading-line uk-text-center"><span>Registrate</span></h3>
+<form method="POST" action="{% url 'register' %}">
+    {% csrf_token %}
+        <input type="text" class="uk-input" placeholder="Usuario" name="username" />
+    {% if form.errors.username %}
+        <span class="uk-label uk-label-warning uk-align-center">{{ form.errors.username }}</span>
+    {% endif %}
+        <input type="email" class="uk-input uk-margin" placeholder="E-mail" name="email" />
+    {% if form.errors.email %}
+        <span class="uk-label uk-label-warning uk-align-center">{{ form.errors.email }}</span>
+    {% endif %}
+        <input type="password" class="uk-input" placeholder="Contraseña" name="password1" />
+    {% if form.errors.password1 %}
+        <span class="uk-label uk-label-warning uk-align-center">{{ form.errors.password1 }}</span>
+    {% endif %}
+        <input type="password" class="uk-input uk-margin " placeholder="Repite tu contraseña" name="password2" />
+    {% if form.errors.password2 %}
+        <span class="uk-label uk-label-warning uk-align-center">{{ form.errors.password2 }}</span>
+    {% endif %}
+
+
+    <button class="uk-margin" type="submit">Login</button>
+</form>
+{% endblock %}

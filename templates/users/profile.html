@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<form action="{% url 'profile' %}" method="POST" enctype="multipart/form-data" class="uk-text-center">
+    {% csrf_token %}
+    {% if form.errors %}
+        <span class="uk-label uk-label-warning uk-margin uk-align-center">{{ form.errors }}</span>
+    {% endif %}
+    <div class="uk-grid">
+        <div class="uk-inline uk-width-1-2">
+            {% if profile.profile_picture %}
+                <img src="{{ profile.profile_picture.url }}" width="100" height="100" alt="" class="uk-border-circle" />
+            {% else %}
+                <img src="{% static 'img/default-profile.png' %}" width="100" height="100" alt="" class="uk-border-circle" />
+            {% endif %}
+            <input type="file" class="uk-input" name="picture"/>
+        </div>
+        <div class="uk-inline uk-width-1-2">
+            <h3>@{{ user.username }}</h3>
+        </div>
+    </div>
+    <input type="text" class="uk-input uk-margin" name="website" value="{{ profile.website }}" />
+    <input type="text" class="uk-input" name="biography" value="{{ profile.biography }}" />
+    <input type="number" class="uk-input uk-margin" name="phone" value="{{ profile.phone_number }}" />
+    <input type="submit" value="Update my info">
+</form>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="uk-flex uk-flex-center uk-margin">
+    <img src="{% static 'img/instagram.png' %}" alt="">
+</div>
+<h3 class="uk-heading-line uk-text-center"><span>Accede</span></h3>
+<form method="POST" action="{% url 'login' %}">
+    {% csrf_token %}
+    {% if error %}
+        <span class="uk-label uk-label-warning uk-margin uk-align-center">{{error}}</span>
+    {% endif %}
+    <input type="text" class="uk-input" placeholder="Usuario" name="username" />
+    <input type="password" class="uk-input uk-margin" placeholder="Contraseña" name="password" />
+    <span>¿Aún no tienes una cuenta? <a href="{% url 'register' %}">Registrate aquí</a></span>
+    <button class="uk-margin" type="submit">Login</button>
+</form>
+{% endblock %}
